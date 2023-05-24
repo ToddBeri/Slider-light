@@ -1,0 +1,190 @@
+.showcase{
+  background-color: black;
+  height: 100%;
+  position: relative;
+  color: white;
+  overflow: hidden;
+  &::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    box-shadow: inset 0 0 500px black;
+  }
+  &::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-image: url(../img/light.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center -65px;
+    animation: k-Light 3s ease-in-out infinite;
+  }
+}
+.showcase__video{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; //занимает всё пространство!
+  opacity: .45;
+}
+
+
+
+.showcase__content-wrapper{
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding: var(--padding) 0;
+  &::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(../img/glow.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: k-glow 1.8s ease-in-out infinite;
+  }
+}
+.showcase__header{
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+  top: 40px;
+  font-size: 32px;
+  opacity: 0.75;
+  color: rgba(255, 255, 255, .75);
+  & span{
+    color: var(--accent);
+  }
+}
+
+
+
+.showcase-carousel__item{
+  position: relative;
+  height: calc(100vh - var(--padding)*2);
+  text-align: center;
+  opacity: 0.25;
+  transform: scale(.75);
+  transition: opacity 1.8s var(--transition), transform 1.8s var(--transition);
+  &::after{
+    content: '';
+    width: 120px;
+    height: 0;
+    position: absolute;
+    box-shadow: 0 0 45px 10px black;
+    bottom: -10px;
+    left: calc(50% - 60px);
+  }
+
+  p{
+    position: absolute;
+    bottom: -85px;
+    width: 100%;
+    font-size: 32px;
+    color:rgba(255, 255, 255, .75);
+  }
+}
+
+
+//кАстЫлИ 
+.showcase-carousel__image-wrapper{
+	height: 500px;
+  
+}
+
+.showcase-carousel__item.swiper-slide-active{
+  opacity: .8;
+  transform: scale(1);
+}
+
+
+
+.showcase-carousel__image-wrapper > * {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  perspective: 150px;
+  transform-style: preserve-3d;
+}
+.showcase-carousel__image{
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+.showcase-carousel__image-left{
+  perspective-origin: left center; 
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%) ; //берём точки: 0 0 - лев верх угол, 50% 0 - центр верх
+  .showcase-carousel__image{
+    animation: k-Left-side 2s ease-in-out infinite;
+    animation-direction: alternate;
+  }
+}
+.showcase-carousel__image-right{
+  perspective-origin: right center; 
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%) ;
+  .showcase-carousel__image{
+    animation: k-Right-side 2s ease-in-out infinite;
+    animation-direction: alternate;
+  }
+}
+.showcase-navigation{
+  overflow: hidden;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+  &>*{
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    outline: none;
+    .swiper-button-disabled{
+      display: none;
+    }
+    &::before{
+      content: '?';
+      opacity: 0;
+      transition: opacity .75s ease-out;
+      position: absolute;
+      transform: rotate(-90deg);
+      left: 50px;
+      top: 40%;
+      font-size: 50px;
+    }
+  }
+  
+  .showcase-navigation__next{
+    right: 0;
+    &::before{
+      transform: rotate(90deg);
+      right: 50px;
+      left: auto;
+    }
+  }
+}
+
+
+.showcase-navigation >*:hover::before{
+  opacity: .5;
+}
